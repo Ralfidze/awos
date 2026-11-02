@@ -16,7 +16,7 @@ This command creates the technical specification — the engineering plan that t
 ## How it works
 
 1. **Identifies the target spec**: Uses your prompt to find the right spec directory, or asks you to choose from available specs.
-2. **Gathers context**: Reads the functional spec, architecture document, and analyzes the existing codebase. If specialist subagents are available (e.g., `python-expert`, `react-expert`), it delegates codebase analysis to them.
+2. **Gathers context**: Reads the functional spec, architecture document, and analyzes the existing codebase. If specialist subagents are available (e.g., `python-backend`, `react-frontend`), it delegates codebase analysis to them.
 3. **Interactive drafting**: Works through the template section by section — high-level approach, detailed system changes, API contracts, data models, risks. For each decision, it proposes an assumption and asks you to confirm.
 4. **Checks for new capabilities**: After saving, reviews whether the spec introduces technologies not covered by your current agents. If so, generates a pre-filled `/awos:hire` command.
 

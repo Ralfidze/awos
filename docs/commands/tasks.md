@@ -17,7 +17,7 @@ This command creates an actionable plan by breaking down the technical specifica
 1. **Identifies the target spec**: Uses your prompt or asks you to choose from available specs.
 2. **Analyzes both specs**: Reads the functional and technical specifications to understand both "what" and "how".
 3. **Creates vertical slices**: Generates a list where each slice is a small, end-to-end piece of functionality — not a horizontal layer.
-4. **Assigns agents**: Each task under a slice gets an agent assignment (e.g., `**[Agent: python-expert]**`) matched against the agents actually available in the session, based on the technology involved.
+4. **Assigns agents**: Each task under a slice gets an agent assignment (e.g., `**[Agent: python-backend]**`) matched against the agents actually available in the session, based on the technology involved.
 5. **Adds verification steps**: Each slice includes test scenarios that agents must verify using real tools (browser MCP, curl, shell, etc.).
 6. **Presents for review**: Saves the plan first, then shows the full slice/task list for review — the `<!-- not-user-reviewed -->` marker clears once you confirm.
 

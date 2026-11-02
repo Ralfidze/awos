@@ -98,21 +98,21 @@ Skip this step if `SKIP_TESTS = true`.
       - [ ] Run all generated tests. All must pass. Fix any failures before proceeding. **[Agent: {qa-agent}]**
     ```
 
-- **Example of applying the rule for "User Profile Picture Upload":** The agent names below assume a project whose `Agent`-tool roster happens to provide `react-expert`, `python-expert`, and `manual-qa-expert`. Slice 3 keeps the literal `{qa-agent}` placeholder from the Step 3a template — in a real plan it is substituted with the QA agent selected there (or `general-purpose` when none exists). In a real run every name comes from the Step 3.4 introspection — a task no listed agent covers goes through Steps 3a/3b, never borrows a name from this example.
+- **Example of applying the rule for "User Profile Picture Upload":** The agent names below assume a project whose `Agent`-tool roster happens to provide `react-frontend`, `python-backend`, and `manual-qa`. Slice 3 keeps the literal `{qa-agent}` placeholder from the Step 3a template — in a real plan it is substituted with the QA agent selected there (or `general-purpose` when none exists). In a real run every name comes from the Step 3.4 introspection — a task no listed agent covers goes through Steps 3a/3b, never borrows a name from this example.
   - **Bad, Horizontal Plan (DO NOT DO THIS):**
     - `[ ] Add avatar_url to users table`
     - `[ ] Create all avatar API endpoints (upload, delete)`
     - `[ ] Build the entire profile picture UI`
   - **Good, Vertical Slices with subagent assignments (DO THIS):**
     - `[ ] **Slice 1: Display a placeholder avatar on the profile page**`
-      - `[ ] Task: Add a non-functional 'ProfileAvatar' UI component that shows a static placeholder image. **[Agent: react-expert]**`
-      - `[ ] Task: Place the component on the profile page. **[Agent: react-expert]**`
-      - `[ ] Verify: Start the app, open the profile page, confirm the placeholder avatar renders, then delete any screenshots or recordings produced during the check. **[Agent: manual-qa-expert]**`
+      - `[ ] Task: Add a non-functional 'ProfileAvatar' UI component that shows a static placeholder image. **[Agent: react-frontend]**`
+      - `[ ] Task: Place the component on the profile page. **[Agent: react-frontend]**`
+      - `[ ] Verify: Start the app, open the profile page, confirm the placeholder avatar renders, then delete any screenshots or recordings produced during the check. **[Agent: manual-qa]**`
     - `[ ] **Slice 2: Display the user's actual avatar if it exists**`
-      - `[ ] Task: Add avatar_url column to the users table via a migration. **[Agent: python-expert]**`
-      - `[ ] Task: Update the user API endpoint to return the avatar_url. **[Agent: python-expert]**`
-      - `[ ] Task: Update the 'ProfileAvatar' component to fetch and display the user's avatar_url, falling back to the placeholder if null. **[Agent: react-expert]**`
-      - `[ ] Verify: Run the application, drive the profile page through the available browser-automation tool (whichever the project ships — playwright-cli, cypress, the chrome MCP, etc.), confirm the correct avatar or placeholder is shown, and delete any screenshots or recordings produced during the check. **[Agent: manual-qa-expert]**`
+      - `[ ] Task: Add avatar_url column to the users table via a migration. **[Agent: python-backend]**`
+      - `[ ] Task: Update the user API endpoint to return the avatar_url. **[Agent: python-backend]**`
+      - `[ ] Task: Update the 'ProfileAvatar' component to fetch and display the user's avatar_url, falling back to the placeholder if null. **[Agent: react-frontend]**`
+      - `[ ] Verify: Run the application, drive the profile page through the available browser-automation tool (whichever the project ships — playwright-cli, cypress, the chrome MCP, etc.), confirm the correct avatar or placeholder is shown, and delete any screenshots or recordings produced during the check. **[Agent: manual-qa]**`
     - `[ ] **Slice 3: Feature Testing & Regression**`
       > Verifies the whole feature end-to-end against functional-spec.md, run after all implementation slices are complete.
       - `[ ] Read functional-spec.md acceptance criteria in full. Generate acceptance-level tests that verify the entire feature as a whole — not individual slices. Cover applicable layers (unit for pure logic, integration for service interactions, e2e for user flows) based on the project's testing stack. Write tests with RED validation (must fail before implementation is confirmed done). Annotate each test with @spec: [spec-directory] and @regression if suitable for long-term regression. **[Agent: {qa-agent}]**`

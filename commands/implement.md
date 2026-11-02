@@ -53,7 +53,7 @@ Follow this process precisely. Steps 2–5 form the per-task loop: repeat them f
 1.  Read `[target-spec-directory]/tasks.md`. Re-reading it each iteration ensures the next task is selected from the latest on-disk state.
 2.  Pick the next task in scope. Tasks are the nested checkbox lines under a slice header — they carry the `**[Agent: name]**` marker. Skip slice headers themselves (`- [ ] **Slice N: ...**`); they are composite groupings, not units of work. If the user named a single task, that's the only task; once it's done the loop ends. Otherwise pick the first remaining `[ ]` task in document order from the freshly-read `tasks.md`. If no incomplete tasks remain, exit the loop and go to Step 6.
 3.  Extract the agent assignment from the selected task line:
-    - Look for the `**[Agent: agent-name]**` pattern in the task line (e.g., `python-expert`, `react-expert`).
+    - Look for the `**[Agent: agent-name]**` pattern in the task line (e.g., `python-backend`, `react-frontend`).
     - If no assignment is found, default to `general-purpose`.
     - Verify the named agent exists by checking it against the `Agent` tool's description block in your own system prompt, which lists every available agent — project-local ones (files under `.claude/agents/*.md`) and plugin-provided ones (recognized by the `plugin-name:` prefix on `subagent_type`). This is introspection, not a tool call.
     - If the named agent is not in that list, delegate this task to `general-purpose` instead and record the substitution — which task, which missing agent — for the Step 6 report. A plan may name specialists that were never installed or have since been removed; the task still runs, just without the specialist.
@@ -107,6 +107,6 @@ After the loop exits, count completed `[x]` and total tasks in the target spec's
 - If tasks remain: "Implementation run complete. [N]/[Total] tasks done ([X]%)."
 - If all tasks are `[x]`: "All tasks complete (100%). Run `/awos:verify` to verify acceptance criteria and mark spec as Completed."
 
-If any task was delegated to `general-purpose` because its `**[Agent: name]**` marker named an agent that is not installed (recorded in Step 2), list each substitution: the task and the missing agent name (e.g., "Task 2.3 ran under `general-purpose` — `rust-expert` is not installed"). Never present substituted work as specialist work.
+If any task was delegated to `general-purpose` because its `**[Agent: name]**` marker named an agent that is not installed (recorded in Step 2), list each substitution: the task and the missing agent name (e.g., "Task 2.3 ran under `general-purpose` — `rust-backend` is not installed"). Never present substituted work as specialist work.
 
 If `tasks.md` carries a `## Open Questions` section, repeat its entries here. `/awos:tasks` records staffing gaps there — tasks it assigned to `general-purpose` because no installed agent covered them — and the user kept them recorded rather than resolving them, so this run executed those tasks under the generalist. The report is where that choice becomes visible again.
